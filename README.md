@@ -71,9 +71,15 @@ uv run python -m dual_xarms_sim.replay_insert_data
 # quick smoke test — first 200 steps only
 uv run python -m dual_xarms_sim.replay_insert_data --max-steps 200
 
-# a specific file, with the on-screen viewer
-uv run python -m dual_xarms_sim.replay_insert_data /path/to/episode.npz --render human
+# the on-screen viewer (macOS: use `mjpython`, not `python` — see note below)
+uv run mjpython -m dual_xarms_sim.replay_insert_data /path/to/episode.npz --render human
 ```
+
+> **macOS viewer note:** the interactive viewer (`--render human`) uses MuJoCo's passive viewer,
+> which must run on the main thread. On macOS launch it with **`mjpython`** instead of `python`
+> (plain `uv run python ... --render human` errors). `mjpython` ships inside the `mujoco` package,
+> so it is already in `.venv/bin/` after `uv sync` — no extra install. Headless replay
+> (`rgb_array`, the default) runs fine under plain `python`.
 
 The script prints `max |replay_reward - saved_reward|` as a reproducibility check — it should be
 ~0 for a faithful replay.
