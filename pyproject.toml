@@ -15,7 +15,14 @@ dependencies = [
     "scipy>=1.11",
     "opencv-python>=4.10",
     "tqdm>=4.66",
+    "requests>=2.31",
 ]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
 
 [build-system]
 requires = ["hatchling"]

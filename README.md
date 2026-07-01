@@ -6,9 +6,10 @@ recover the per-step IK mocap targets.
 
 This is a focused extraction from the RAC project
 ([`Leo428/RAC`](https://github.com/Leo428/RAC) → `dual_xarms/dual_xarms_sim`). Only the code
-needed to build the sim env and replay trajectories is included — all real-robot / VR-teleop
-glue (Oculus intervention, oculus server, streaming HDF5, packing/sockets task variants, VLM
-annotation, data collection) has been removed.
+needed to build the sim env and replay trajectories is included — the real-robot / VR-teleop glue
+(oculus server, streaming HDF5, packing/sockets task variants, VLM annotation, data collection) has
+been removed. The upstream `Leo428/RAC` `OculusIntervention` wrapper is kept for optional teleop
+(it is not used by any replay path).
 
 ## What's here
 
@@ -20,11 +21,14 @@ dual_xarms_sim/                     importable package (name kept from the sourc
 ├── replay_insert_data.py           >>> replay a recorded .npz trajectory in-sim, dump mocap sidecar
 ├── recover_mocap.py                reconstruct IK mocap targets from actions (no sim) + --verify
 ├── replay_abs_action.py            audit the absolute/chunk-delta action round-trip
+├── oculus_intervention.py          OculusIntervention teleop wrapper (upstream Leo428/RAC; optional)
 ├── utils/transformation.py         SE(3) / adjoint helpers used by RelativeFrame
+├── utils/network.py                oculus HTTP reader (used only by OculusIntervention)
 └── ufactory_xarm7/                 scene assets
     ├── insert_scene.xml            the double-insert scene (deeper 0.09 sockets — local geometry)
     ├── dual_xarm7_small_hand.xml   robot + gripper model (included by insert_scene.xml)
     └── assets/                     18 STL meshes + 2 wood textures referenced by the scene
+tests/                              pytest: mocap-recurrence bit-exactness guard
 data/
 └── sim_dual_xarms_double_insert_20260518_121749.npz   sample episode (3247 steps, seed=0; git-ignored)
 ```
@@ -91,6 +95,21 @@ live env replay (expected bit-exact):
 ```bash
 uv run python -m dual_xarms_sim.recover_mocap data/sim_dual_xarms_double_insert_20260518_121749.npz --verify
 ```
+
+## Tests
+
+```bash
+uv run pytest
+```
+
+`tests/test_recover_mocap.py` guards the bit-exact property: it steps a global-action sequence
+through the live env and asserts the pure `reconstruct_mocap` recurrence matches to < 1e-5 (a
+self-contained synthetic case, plus the full bundled episode when present). The env needs an
+OpenGL backend — set `MUJOCO_GL=egl` (or `osmesa`) if the default fails; the test skips itself if
+no backend is available.
+
+> If you have ROS on your `PYTHONPATH` (e.g. `/opt/ros/...`), its `launch_testing` pytest plugins
+> break collection. Prefix with `PYTHONPATH=` to drop them: `PYTHONPATH= MUJOCO_GL=egl uv run pytest`.
 
 ## Notes
 
