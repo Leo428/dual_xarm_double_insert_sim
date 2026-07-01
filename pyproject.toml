@@ -1,0 +1,33 @@
+[project]
+name = "dual-xarm-double-insert-sim"
+version = "0.1.0"
+description = "Minimal MuJoCo dual-xArm double-insert sim env + trajectory (npz) replay, extracted from the RAC project."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Zheyuan Hu" }]
+dependencies = [
+    "mujoco>=3.3.6",
+    "mink>=0.0.13",
+    "qpsolvers[quadprog]>=4.3",
+    "gymnasium>=1.0",
+    "loop-rate-limiters>=1.1",
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "opencv-python>=4.10",
+    "tqdm>=4.66",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["dual_xarms_sim"]
+
+# The sim assets (XML scenes + STL meshes + textures) must ship inside the wheel.
+[tool.hatch.build.targets.wheel.force-include]
+"dual_xarms_sim/ufactory_xarm7" = "dual_xarms_sim/ufactory_xarm7"
+
+[tool.uv]
+# Keep the huge sample .npz out of any build; it lives under data/ and is git-ignored.
+package = true

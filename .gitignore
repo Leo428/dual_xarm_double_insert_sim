@@ -1,0 +1,19 @@
+# Python / uv
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+build/
+dist/
+
+# Large trajectory data — the sample .npz is ~200 MB; keep it out of git.
+data/*.npz
+*_mocap.npz
+
+# MuJoCo
+MUJOCO_LOG.TXT
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/

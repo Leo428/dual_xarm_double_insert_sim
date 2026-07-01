@@ -1,0 +1,81 @@
+<mujoco model="dual_xarm7 scene">
+  <option timestep="0.002" noslip_iterations="5" noslip_tolerance="0"/>
+  <statistic center="0.2 0 0.4" extent=".65" meansize="0.08" />
+  <visual>
+    <global azimuth="150" elevation="-20" />
+    <headlight diffuse="0.4 0.4 0.4" ambient="0.5 0.5 0.5" />
+    <rgba haze="0.15 0.25 0.35 1" />
+    <quality offsamples="8"/>
+  </visual>
+
+  <include file="dual_xarm7_small_hand.xml" />
+
+  <asset>
+    <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1=".1 .2 .3" rgb2=".2 .3 .4"/>
+    <material name="grid" texture="grid" texrepeat="2 2" texuniform="true" reflectance="0"/>
+    <!-- colorspace="linear" ensures correct color rendering in MuJoCo 3.x -->
+    <texture name="T_simpleWoodTable" type="2d" height="512" width="512" colorspace="linear" file="./assets/wood4.png" />
+    <material name="M_simpleWoodTable" texture="T_simpleWoodTable" rgba="0.8 0.8 0.8 1" shininess="0.5" reflectance="0" texrepeat="2 2" texuniform="true" />
+    <texture name="T_simpleWood1" type="2d" height="64" width="64" file="./assets/wood1.png" />
+    <material name="M_simpleWood1" texture="T_simpleWood1" rgba="0.6 0.6 0.6 1" shininess="0.75" reflectance="0" texrepeat="16 16" texuniform="true" />
+  </asset>
+
+  <worldbody>
+    <light pos="0 0 5" />
+    <!-- <geom name="floor" size="1 1 0.01" type="plane" material="grid" /> -->
+    <geom name="floor" size="1 1 0.01" type="plane" material="M_simpleWoodTable" />
+    <body name="left/target" pos="-0.35 0.4 .2" quat="0 0.7071068 -0.7071068 0" mocap="true">
+    <!-- <body name="left/target" pos="-0.2875 0.4 .2" quat="0 0.7071068 -0.7071068 0" mocap="true"> -->
+      <!-- <geom type="box" size=".03 .03 .03" contype="0" conaffinity="0" rgba=".6 .3 .3 0.25" /> -->
+      <geom type="box" size=".03 .03 .03" contype="0" conaffinity="0" rgba=".6 .3 .3 0" />
+    </body>
+
+    <camera name="left/top" pos="-0.0315 0 0.65" quat="0.976296 0.2164396 0 0"
+      fovy="57" />
+    <site name="ego_center" pos="0 0 0.65" quat="0.976296 0.2164396 0 0" />
+    <camera name="right/top" pos="0.0315 0 0.65" quat="0.976296 0.2164396 0 0"
+    fovy="57" />
+
+    <body name="right/target" pos="0.35 0.4 .2" quat="0 0.7071068 -0.7071068 0" mocap="true">
+    <!-- <body name="right/target" pos="0.2875 0.4 .2" quat="0 0.7071068 -0.7071068 0" mocap="true"> -->
+      <!-- <geom type="box" size=".03 .03 .03" contype="0" conaffinity="0" rgba=".3 .3 .6 0.25" /> -->
+      <geom type="box" size=".03 .03 .03" contype="0" conaffinity="0" rgba=".3 .3 .6 0" />
+    </body>
+
+    <body name="block" pos="0 0.5 0.075">
+      <geom name="block" type="box" size="0.2 0.02 0.075" friction=".6" priority="1" material="M_simpleWood1"/>
+    </body>
+
+    <body name="peg" pos="0 0.3 0.05">
+      <joint name="peg" type="free" frictionloss="0.01" />
+      <!-- <inertial pos="0 0 0" mass="0.05" diaginertia="0.002 0.002 0.002" /> -->
+      <!-- <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0 0 0" size="0.06 0.01 0.01" type="box" name="red_peg" rgba="1 0 0 1" /> -->
+      <geom pos="0 0 0" size="0.08 0.015 0.015" type="box" name="peg" rgba="0.60392157 0.61176471 0.61960784 1" />
+    </body>
+
+    <body name="left/socket" pos="-0.2 0.3 0.05">
+      <joint name="left/socket/joint" type="free" frictionloss="0.01" />
+      <inertial pos="0 0 0" mass="0.05" diaginertia="0.002 0.002 0.002" />
+      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 0 -0.02" size="0.09 0.018 0.002" type="box" name="left/socket/wall_1" rgba=".6 .3 .6 1" />
+      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 0 0.02" size="0.09 0.018 0.002" type="box" name="left/socket/wall_2" rgba=".6 .3 .6 1" />
+      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 0.02 0" size="0.09 0.002 0.018" type="box" name="left/socket/wall_3" rgba=".6 .3 .6 1" />
+      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 -0.02 0" size="0.09 0.002 0.018" type="box" name="left/socket/wall_4" rgba=".6 .3 .6 1" />
+      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="-0.035 0 0" size="0.025 0.0075 0.0075" type="box" name="left/socket/pin" rgba="1 0 0 1" />
+    </body>
+
+    <body name="right/socket" pos="0.2 0.3 0.05">
+      <joint name="right/socket/joint" type="free" frictionloss="0.01" />
+      <inertial pos="0 0 0" mass="0.05" diaginertia="0.002 0.002 0.002" />
+      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 0 -0.02" size="0.09 0.018 0.002" type="box" name="right/socket/wall_1" rgba=".3 .3 .6 1" />
+      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 0 0.02" size="0.09 0.018 0.002" type="box" name="right/socket/wall_2" rgba=".3 .3 .6 1" />
+      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 0.02 0" size="0.09 0.002 0.018" type="box" name="right/socket/wall_3" rgba=".3 .3 .6 1" />
+      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 -0.02 0" size="0.09 0.002 0.018" type="box" name="right/socket/wall_4" rgba=".3 .3 .6 1" />
+      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0.035 0 0" size="0.025 0.0075 0.0075" type="box" name="right/socket/pin" rgba="1 0 0 1" />
+    </body>
+  </worldbody>
+
+  <sensor>
+    <framepos name="block_pos" objtype="body" objname="block" />
+    <framequat name="block_quat" objtype="body" objname="block" />
+  </sensor>
+</mujoco>
