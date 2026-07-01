@@ -27,7 +27,7 @@ from dual_xarms_sim.recover_mocap import reconstruct_mocap
 TOL_POS = 1e-5  # metres
 TOL_ANG = 1e-5  # radians
 
-_SAMPLE = Path(__file__).resolve().parent.parent / "data" / "sim_dual_xarms_double_insert_20260518_121749.npz"
+_SAMPLE = Path(__file__).resolve().parent.parent / "data" / "sim_dual_xarms_double_insert_20260518_121749_slim.npz"
 
 
 def _make_env():

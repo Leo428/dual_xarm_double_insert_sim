@@ -27,8 +27,8 @@ from tqdm import tqdm
 from dual_xarms_sim.fix_dual_xarms_sim import DoubleInsertDualXarmsGymEnv
 from dual_xarms_sim.relative_frame import RelativeFrame
 
-# Sample episode bundled with the repo (raw episode from collect_insert_data.py).
-DEFAULT_NPZ = Path(__file__).resolve().parent.parent / 'data' / 'sim_dual_xarms_double_insert_20260518_121749.npz'
+# Sample episode bundled with the repo (state-only "slim" episode, ~2 MB, committed to git).
+DEFAULT_NPZ = Path(__file__).resolve().parent.parent / 'data' / 'sim_dual_xarms_double_insert_20260518_121749_slim.npz'
 
 
 def _default_out_path(npz_path):

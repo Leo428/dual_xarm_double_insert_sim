@@ -6,8 +6,11 @@ __pycache__/
 build/
 dist/
 
-# Large trajectory data — the sample .npz is ~200 MB; keep it out of git.
+# Large trajectory data — the full episode (with camera images) is ~200 MB; keep it out of git.
 data/*.npz
+# ...except the small state-only "slim" episode (~2 MB), which IS committed.
+!data/*_slim.npz
+# Replay-generated mocap sidecars (incl. *_slim_mocap.npz) stay out.
 *_mocap.npz
 
 # MuJoCo

@@ -29,8 +29,10 @@ dual_xarms_sim/                     importable package (name kept from the sourc
     ├── dual_xarm7_small_hand.xml   robot + gripper model (included by insert_scene.xml)
     └── assets/                     18 STL meshes + 2 wood textures referenced by the scene
 tests/                              pytest: mocap-recurrence bit-exactness guard
+scripts/make_slim_npz.py            strip camera images -> small committable episode
 data/
-└── sim_dual_xarms_double_insert_20260518_121749.npz   sample episode (3247 steps, seed=0; git-ignored)
+├── …_20260518_121749_slim.npz      sample episode, state-only (~2 MB, committed; default for replay + tests)
+└── …_20260518_121749.npz           full episode incl. 4 JPEG cameras/step (~200 MB, git-ignored)
 ```
 
 ## Setup (uv)
@@ -114,6 +116,9 @@ no backend is available.
 ## Notes
 
 - The importable package is `dual_xarms_sim` (kept from the source to avoid rewriting imports).
+- The committed sample is the **slim** episode (state + actions + seed, no camera images) — enough
+  for both replay tools. The full 200 MB episode (4 JPEG cameras/step) is git-ignored; regenerate a
+  slim copy from any full episode with `python scripts/make_slim_npz.py <full.npz> <out_slim.npz>`.
 - The scene uses the **local** insert geometry (socket walls sized `0.09`, small-hand gripper),
   which is what the bundled episode was collected against — do not swap in the upstream
   `Leo428/RAC` scene or the replay will diverge.
