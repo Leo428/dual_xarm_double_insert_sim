@@ -56,20 +56,20 @@
     <body name="left/socket" pos="-0.2 0.3 0.05">
       <joint name="left/socket/joint" type="free" frictionloss="0.01" />
       <inertial pos="0 0 0" mass="0.05" diaginertia="0.002 0.002 0.002" />
-      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 0 -0.02" size="0.09 0.018 0.002" type="box" name="left/socket/wall_1" rgba=".6 .3 .6 1" />
-      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 0 0.02" size="0.09 0.018 0.002" type="box" name="left/socket/wall_2" rgba=".6 .3 .6 1" />
-      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 0.02 0" size="0.09 0.002 0.018" type="box" name="left/socket/wall_3" rgba=".6 .3 .6 1" />
-      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 -0.02 0" size="0.09 0.002 0.018" type="box" name="left/socket/wall_4" rgba=".6 .3 .6 1" />
+      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 0 -0.02" size="0.06 0.018 0.002" type="box" name="left/socket/wall_1" rgba=".6 .3 .6 1" />
+      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 0 0.02" size="0.06 0.018 0.002" type="box" name="left/socket/wall_2" rgba=".6 .3 .6 1" />
+      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 0.02 0" size="0.06 0.002 0.018" type="box" name="left/socket/wall_3" rgba=".6 .3 .6 1" />
+      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 -0.02 0" size="0.06 0.002 0.018" type="box" name="left/socket/wall_4" rgba=".6 .3 .6 1" />
       <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="-0.035 0 0" size="0.025 0.0075 0.0075" type="box" name="left/socket/pin" rgba="1 0 0 1" />
     </body>
 
     <body name="right/socket" pos="0.2 0.3 0.05">
       <joint name="right/socket/joint" type="free" frictionloss="0.01" />
       <inertial pos="0 0 0" mass="0.05" diaginertia="0.002 0.002 0.002" />
-      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 0 -0.02" size="0.09 0.018 0.002" type="box" name="right/socket/wall_1" rgba=".3 .3 .6 1" />
-      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 0 0.02" size="0.09 0.018 0.002" type="box" name="right/socket/wall_2" rgba=".3 .3 .6 1" />
-      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 0.02 0" size="0.09 0.002 0.018" type="box" name="right/socket/wall_3" rgba=".3 .3 .6 1" />
-      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 -0.02 0" size="0.09 0.002 0.018" type="box" name="right/socket/wall_4" rgba=".3 .3 .6 1" />
+      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 0 -0.02" size="0.06 0.018 0.002" type="box" name="right/socket/wall_1" rgba=".3 .3 .6 1" />
+      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 0 0.02" size="0.06 0.018 0.002" type="box" name="right/socket/wall_2" rgba=".3 .3 .6 1" />
+      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 0.02 0" size="0.06 0.002 0.018" type="box" name="right/socket/wall_3" rgba=".3 .3 .6 1" />
+      <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.05 0.001" pos="0 -0.02 0" size="0.06 0.002 0.018" type="box" name="right/socket/wall_4" rgba=".3 .3 .6 1" />
       <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" pos="0.035 0 0" size="0.025 0.0075 0.0075" type="box" name="right/socket/pin" rgba="1 0 0 1" />
     </body>
   </worldbody>
